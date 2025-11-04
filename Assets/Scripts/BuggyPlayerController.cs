@@ -1,26 +1,25 @@
-using UnityEngine
+using UnityEngine;
 
 public class BuggyPlayerController : MonoBehaviour
 {
-    private float speed = 5f
-                            Rigidbody2D rb
-    Animator anim
+    public float speed = 5f;
+    public float jumpForce = 5f;
+
+    private Rigidbody2D rb;
+    private Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-            anim == GetComponent<Animator>()
+        anim = GetComponent<Animator>();
     }
-}
+
     void Update()
     {
-        float moveInput = Input.GetAxis("Horizental")
-    
-            if (moveInputs > 0)
-                                transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
-        else if (moveInput < 0)
-            transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
-        
-                     anim.SetBool("isMoving", moveInput != 0)
+        float moveInput = Input.GetAxisRaw("Horizontal");
+
+        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+
+        anim.SetBool("isMoving", moveInput != 0);
     }
 }
